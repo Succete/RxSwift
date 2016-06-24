@@ -20,7 +20,7 @@ extension UIProgressView {
     Bindable sink for `progress` property
     */
     public var rx_progress: AnyObserver<Float> {
-        return UIBindingObserver(UIElement: self) { progressView, progress in
+        return UIBindingObserver(uiElement: self) { progressView, progress in
             progressView.progress = progress
         }.asObserver()
     }

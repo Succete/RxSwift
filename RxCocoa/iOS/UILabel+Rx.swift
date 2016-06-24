@@ -20,7 +20,7 @@ extension UILabel {
     Bindable sink for `text` property.
     */
     public var rx_text: AnyObserver<String> {
-        return UIBindingObserver(UIElement: self) { label, text in
+        return UIBindingObserver(uiElement: self) { label, text in
             label.text = text
         }.asObserver()
     }
@@ -28,8 +28,8 @@ extension UILabel {
     /**
     Bindable sink for `attributedText` property.
     */
-    public var rx_attributedText: AnyObserver<NSAttributedString?> {
-        return UIBindingObserver(UIElement: self) { label, text in
+    public var rx_attributedText: AnyObserver<AttributedString?> {
+        return UIBindingObserver(uiElement: self) { label, text in
             label.attributedText = text
         }.asObserver()
     }

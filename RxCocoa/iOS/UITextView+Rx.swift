@@ -52,7 +52,7 @@ extension UITextView : RxTextInput {
                 .startWith(text)
         }
 
-        let bindingObserver = UIBindingObserver(UIElement: self) { (textView, text: String) in
+        let bindingObserver = UIBindingObserver(uiElement: self) { (textView, text: String) in
             // This check is important because setting text value always clears control state
             // including marked text selection which is imporant for proper input 
             // when IME input method is used.

@@ -19,7 +19,7 @@ extension UIActivityIndicatorView {
     Bindable sink for `startAnimating()`, `stopAnimating()` methods.
     */
     public var rx_animating: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self) { activityIndicator, active in
+        return UIBindingObserver(uiElement: self) { activityIndicator, active in
             if active {
                 self.startAnimating()
             } else {

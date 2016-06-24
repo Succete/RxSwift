@@ -16,27 +16,27 @@ public enum DispatchQueueSchedulerQOS {
     /**
     Identifies global dispatch queue with `QOS_CLASS_USER_INTERACTIVE`
     */
-    case UserInteractive
+    case userInteractive
     
     /**
     Identifies global dispatch queue with `QOS_CLASS_USER_INITIATED`
     */
-    case UserInitiated
+    case userInitiated
     
     /**
     Identifies global dispatch queue with `QOS_CLASS_DEFAULT`
     */
-    case Default
+    case `default`
 
     /**
      Identifies global dispatch queue with `QOS_CLASS_UTILITY`
      */
-    case Utility
+    case utility
     
     /**
      Identifies global dispatch queue with `QOS_CLASS_BACKGROUND`
      */
-    case Background
+    case background
 }
 
 
@@ -44,11 +44,11 @@ public enum DispatchQueueSchedulerQOS {
 extension DispatchQueueSchedulerQOS {
     var QOSClass: qos_class_t {
         switch self {
-        case .UserInteractive: return QOS_CLASS_USER_INTERACTIVE
-        case .UserInitiated:   return QOS_CLASS_USER_INITIATED
-        case .Default:         return QOS_CLASS_DEFAULT
-        case .Utility:         return QOS_CLASS_UTILITY
-        case .Background:      return QOS_CLASS_BACKGROUND
+        case .userInteractive: return QOS_CLASS_USER_INTERACTIVE//DispatchQueueAttributes.qosUserInteractive
+        case .userInitiated:   return QOS_CLASS_USER_INITIATED//DispatchQueueAttributes.qosUserInitiated
+        case .default:         return QOS_CLASS_DEFAULT//DispatchQueueAttributes.qosDefault
+        case .utility:         return QOS_CLASS_UTILITY//DispatchQueueAttributes.qosUtility
+        case .background:      return QOS_CLASS_BACKGROUND//DispatchQueueAttributes.qosBackground
         }
     }
 }

@@ -19,7 +19,7 @@ extension UINavigationItem {
     Bindable sink for `title` property.
     */
     public var rx_title: AnyObserver<String?> {
-        return UIBindingObserver(UIElement: self) { navigationItem, text in
+        return UIBindingObserver(uiElement: self) { navigationItem, text in
             navigationItem.title = text
             }.asObserver()
     }

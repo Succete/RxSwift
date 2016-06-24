@@ -20,7 +20,7 @@ extension UITabBarItem {
      Bindable sink for `badgeValue` property.
      */
     public var rx_badgeValue: AnyObserver<String?> {
-        return UIBindingObserver(UIElement: self) { tabBarItem, badgeValue in
+        return UIBindingObserver(uiElement: self) { tabBarItem, badgeValue in
             tabBarItem.badgeValue = badgeValue
         }.asObserver()
     }

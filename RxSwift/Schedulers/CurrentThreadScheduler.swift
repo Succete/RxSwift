@@ -22,7 +22,7 @@ import Foundation
   let CurrentThreadSchedulerValueInstance     = CurrentThreadSchedulerKeyInstance
 
   class CurrentThreadSchedulerKey : NSObject, NSCopying {
-      override func isEqual(object: AnyObject?) -> Bool {
+      override func isEqual(_ object: AnyObject?) -> Bool {
           return object === CurrentThreadSchedulerKeyInstance
       }
 
@@ -32,13 +32,13 @@ import Foundation
           return CurrentThreadSchedulerKeyInstance
       }
 
-      func copyWithZone(zone: NSZone) -> AnyObject {
+      func copy(with zone: NSZone?) -> AnyObject {
           return CurrentThreadSchedulerKeyInstance
       }
   }
 
   class CurrentThreadSchedulerQueueKey : NSObject, NSCopying {
-      override func isEqual(object: AnyObject?) -> Bool {
+      override func isEqual(_ object: AnyObject?) -> Bool {
           return object === CurrentThreadSchedulerQueueKeyInstance
       }
 
@@ -48,7 +48,7 @@ import Foundation
           return CurrentThreadSchedulerQueueKeyInstance
       }
 
-      func copyWithZone(zone: NSZone) -> AnyObject {
+      func copy(with zone: NSZone?) -> AnyObject {
           return CurrentThreadSchedulerQueueKeyInstance
       }
   }
@@ -71,10 +71,10 @@ public class CurrentThreadScheduler : ImmediateSchedulerType {
 
     static var queue : ScheduleQueue? {
         get {
-            return NSThread.getThreadLocalStorageValueForKey(CurrentThreadSchedulerQueueKeyInstance)
+            return Thread.getThreadLocalStorageValueForKey(CurrentThreadSchedulerQueueKeyInstance)
         }
         set {
-            NSThread.setThreadLocalStorageValue(newValue, forKey: CurrentThreadSchedulerQueueKeyInstance)
+            Thread.setThreadLocalStorageValue(newValue, forKey: CurrentThreadSchedulerQueueKeyInstance)
         }
     }
 
@@ -83,11 +83,11 @@ public class CurrentThreadScheduler : ImmediateSchedulerType {
     */
     public static private(set) var isScheduleRequired: Bool {
         get {
-            let value: CurrentThreadSchedulerValue? = NSThread.getThreadLocalStorageValueForKey(CurrentThreadSchedulerKeyInstance)
+            let value: CurrentThreadSchedulerValue? = Thread.getThreadLocalStorageValueForKey(CurrentThreadSchedulerKeyInstance)
             return value == nil
         }
         set(isScheduleRequired) {
-            NSThread.setThreadLocalStorageValue(isScheduleRequired ? nil : CurrentThreadSchedulerValueInstance, forKey: CurrentThreadSchedulerKeyInstance)
+            Thread.setThreadLocalStorageValue(isScheduleRequired ? nil : CurrentThreadSchedulerValueInstance, forKey: CurrentThreadSchedulerKeyInstance)
         }
     }
 
@@ -101,7 +101,7 @@ public class CurrentThreadScheduler : ImmediateSchedulerType {
     - parameter action: Action to be executed.
     - returns: The disposable object used to cancel the scheduled action (best effort).
     */
-    public func schedule<StateType>(state: StateType, action: (StateType) -> Disposable) -> Disposable {
+    public func schedule<StateType>(_ state: StateType, action: (StateType) -> Disposable) -> Disposable {
         if CurrentThreadScheduler.isScheduleRequired {
             CurrentThreadScheduler.isScheduleRequired = false
 

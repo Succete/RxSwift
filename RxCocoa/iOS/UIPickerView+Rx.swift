@@ -27,7 +27,7 @@ extension UIPickerView {
         let source = rx_delegate
             .observe(#selector(UIPickerViewDelegate.pickerView(_:didSelectRow:inComponent:)))
             .map {
-                return (try castOrThrow(Int.self, $0[1]), try castOrThrow(Int.self, $0[2]))
+                return (row: try castOrThrow(Int.self, $0[1]), component: try castOrThrow(Int.self, $0[2]))
             }
         return ControlEvent(events: source)
     }

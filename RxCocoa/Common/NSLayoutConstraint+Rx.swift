@@ -24,7 +24,7 @@ extension NSLayoutConstraint {
      Bindable sink for `constant` property.
      */
     public var rx_constant: AnyObserver<CGFloat> {
-        return UIBindingObserver(UIElement: self) { constraint, constant in
+        return UIBindingObserver(uiElement: self) { constraint, constant in
             constraint.constant = constant
         }.asObserver()
     }
@@ -34,8 +34,8 @@ extension NSLayoutConstraint {
      */
     @available(iOS 8, OSX 10.10, *)
     public var rx_active: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self) { constraint, value in
-            constraint.active = value
+        return UIBindingObserver(uiElement: self) { constraint, value in
+            constraint.isActive = value
         }.asObserver()
     }
 }

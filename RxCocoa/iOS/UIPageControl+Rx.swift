@@ -20,7 +20,7 @@ extension UIPageControl {
     Bindable sink for `currentPage` property.
     */
     public var rx_currentPage: AnyObserver<Int> {
-        return UIBindingObserver(UIElement: self) { controller, page in
+        return UIBindingObserver(uiElement: self) { controller, page in
             controller.currentPage = page
         }.asObserver()
     }

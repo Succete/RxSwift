@@ -22,7 +22,7 @@ require specifying `self.*`, they are made global.
      - returns: Recorded event in time.
     */
     public func next<T>(time: TestTime, _ element: T) -> Recorded<Event<T>> {
-        return Recorded(time: time, event: .Next(element))
+        return Recorded(time: time, event: .next(element))
     }
 
     /**
@@ -33,7 +33,7 @@ require specifying `self.*`, they are made global.
      - returns: Recorded event in time.
     */
     public func completed<T>(time: TestTime, _ type: T.Type = T.self) -> Recorded<Event<T>> {
-        return Recorded(time: time, event: .Completed)
+        return Recorded(time: time, event: .completed)
     }
 
     /**
@@ -41,8 +41,8 @@ require specifying `self.*`, they are made global.
 
      - parameter time: Recorded virtual time the `.Completed` event occurs.
     */
-    public func error<T>(time: TestTime, _ error: ErrorType, _ type: T.Type = T.self) -> Recorded<Event<T>> {
-        return Recorded(time: time, event: .Error(error))
+    public func error<T>(time: TestTime, _ error: ErrorProtocol, _ type: T.Type = T.self) -> Recorded<Event<T>> {
+        return Recorded(time: time, event: .error(error))
     }
 //}
 
@@ -102,9 +102,9 @@ public func XCTAssertEqual<T: Equatable>(lhs: [Recorded<Event<T>>], _ rhs: [Reco
     printSequenceDifferences(lhs, rhs, ==)
 }
 
-func printSequenceDifferences<E>(lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) {
+func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) {
     print("Differences:")
-    for (index, elements) in zip(lhs, rhs).enumerate() {
+    for (index, elements) in zip(lhs, rhs).enumerated() {
         let l = elements.0
         let r = elements.1
         if !equal(l, r) {
@@ -114,10 +114,10 @@ func printSequenceDifferences<E>(lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) 
     }
 
     let shortest = min(lhs.count, rhs.count)
-    for (index, element) in lhs[shortest ..< lhs.count].enumerate() {
+    for (index, element) in lhs[shortest ..< lhs.count].enumerated() {
         print("lhs[\(index + shortest)]:\n    \(element)")
     }
-    for (index, element) in rhs[shortest ..< rhs.count].enumerate() {
+    for (index, element) in rhs[shortest ..< rhs.count].enumerated() {
         print("rhs[\(index + shortest)]:\n    \(element)")
     }
 }

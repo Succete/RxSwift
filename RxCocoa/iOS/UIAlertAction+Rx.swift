@@ -23,8 +23,8 @@ extension UIAlertAction {
      Bindable sink for `enabled` property.
      */
     public var rx_enabled: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self) { alertAction, value in
-            alertAction.enabled = value
+        return UIBindingObserver(uiElement: self) { alertAction, value in
+            alertAction.isEnabled = value
         }.asObserver()
     }
     

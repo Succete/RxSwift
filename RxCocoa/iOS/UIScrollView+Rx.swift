@@ -40,7 +40,7 @@ extension UIScrollView {
     public var rx_contentOffset: ControlProperty<CGPoint> {
         let proxy = RxScrollViewDelegateProxy.proxyForObject(self)
 
-        let bindingObserver = UIBindingObserver(UIElement: self) { scrollView, contentOffset in
+        let bindingObserver = UIBindingObserver(uiElement: self) { scrollView, contentOffset in
             scrollView.contentOffset = contentOffset
         }
 
@@ -51,8 +51,8 @@ extension UIScrollView {
     Bindable sink for `scrollEnabled` property.
     */
     public var rx_scrollEnabled: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self) { scrollView, scrollEnabled in
-            scrollView.scrollEnabled = scrollEnabled
+        return UIBindingObserver(uiElement: self) { scrollView, scrollEnabled in
+            scrollView.isScrollEnabled = scrollEnabled
         }.asObserver()
     }
 
@@ -64,7 +64,7 @@ extension UIScrollView {
     - parameter delegate: Delegate object.
     - returns: Disposable object that can be used to unbind the delegate.
     */
-    public func rx_setDelegate(delegate: UIScrollViewDelegate)
+    public func rx_setDelegate(_ delegate: UIScrollViewDelegate)
         -> Disposable {
         return RxScrollViewDelegateProxy.installForwardDelegate(delegate, retainDelegate: false, onProxyForObject: self)
     }

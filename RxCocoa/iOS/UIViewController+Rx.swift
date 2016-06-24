@@ -21,7 +21,7 @@ import Foundation
      Bindable sink for `title`.
      */
     public var rx_title: AnyObserver<String> {
-      return UIBindingObserver(UIElement: self) { viewController, title in
+      return UIBindingObserver(uiElement: self) { viewController, title in
         viewController.title = title
       }.asObserver()
     }

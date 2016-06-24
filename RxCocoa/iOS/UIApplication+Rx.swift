@@ -21,8 +21,8 @@ import Foundation
          Bindable sink for `networkActivityIndicatorVisible`.
          */
         public var rx_networkActivityIndicatorVisible: AnyObserver<Bool> {
-            return UIBindingObserver(UIElement: self) { application, active in
-                application.networkActivityIndicatorVisible = active
+            return UIBindingObserver(uiElement: self) { application, active in
+                application.isNetworkActivityIndicatorVisible = active
             }.asObserver()
         }
     }

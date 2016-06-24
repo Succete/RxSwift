@@ -21,32 +21,32 @@ Observer that enforces interface binding rules:
 public class UIBindingObserver<UIElementType, Value where UIElementType: AnyObject> : ObserverType {
     public typealias E = Value
 
-    weak var UIElement: UIElementType?
+    weak var uiElement: UIElementType?
 
     let binding: (UIElementType, Value) -> Void
 
     /**
      Initializes `ViewBindingObserver` using
     */
-    public init(UIElement: UIElementType, binding: (UIElementType, Value) -> Void) {
-        self.UIElement = UIElement
+    public init(uiElement: UIElementType, binding: (UIElementType, Value) -> Void) {
+        self.uiElement = uiElement
         self.binding = binding
     }
 
     /**
      Binds next element to owner view as described in `binding`.
     */
-    public func on(event: Event<Value>) {
+    public func on(_ event: Event<Value>) {
         MainScheduler.ensureExecutingOnScheduler("Element can be bound to user interface only on MainThread.")
 
         switch event {
-        case .Next(let element):
-            if let view = self.UIElement {
+        case .next(let element):
+            if let view = self.uiElement {
                 binding(view, element)
             }
-        case .Error(let error):
+        case .error(let error):
             bindingErrorToInterface(error)
-        case .Completed:
+        case .completed:
             break
         }
     }

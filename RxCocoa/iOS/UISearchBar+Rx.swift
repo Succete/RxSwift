@@ -52,7 +52,7 @@ extension UISearchBar {
                     .startWith(text)
         }
 
-        let bindingObserver = UIBindingObserver(UIElement: self) { (searchBar, text: String) in
+        let bindingObserver = UIBindingObserver(uiElement: self) { (searchBar, text: String) in
             searchBar.text = text
         }
         
@@ -73,7 +73,7 @@ extension UISearchBar {
                 .startWith(index)
         }
         
-        let bindingObserver = UIBindingObserver(UIElement: self) { (searchBar, index: Int) in
+        let bindingObserver = UIBindingObserver(uiElement: self) { (searchBar, index: Int) in
             searchBar.selectedScopeButtonIndex = index
         }
         

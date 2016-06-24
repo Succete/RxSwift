@@ -19,8 +19,8 @@ extension UIView {
      Bindable sink for `hidden` property.
      */
     public var rx_hidden: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self) { view, hidden in
-            view.hidden = hidden
+        return UIBindingObserver(uiElement: self) { view, hidden in
+            view.isHidden = hidden
         }.asObserver()
     }
 
@@ -28,7 +28,7 @@ extension UIView {
      Bindable sink for `alpha` property.
      */
     public var rx_alpha: AnyObserver<CGFloat> {
-        return UIBindingObserver(UIElement: self) { view, alpha in
+        return UIBindingObserver(uiElement: self) { view, alpha in
             view.alpha = alpha
         }.asObserver()
     }
